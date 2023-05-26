@@ -1,6 +1,3 @@
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Nav from '../components/Nav'
 import logo from '../assets/img/prc_news_logo_black.svg'
 import {Link} from 'react-router-dom'
 
