@@ -17,7 +17,7 @@ const Contact = () => {
           <p className='mt-2'><b>Phone</b>: +383-XX-XXX-XXX</p>
           <p className='mt-2'><b>Address</b>: Pristina, Kosova. Unknown St.</p>
         </div>
-        <div className='p-12 flex flex-1 flex-col bg-[#244AA5] w-[80%] h-[85vh] text-slate-100'>
+        <form className='p-12 flex flex-1 flex-col bg-[#244AA5] w-[80%] h-[85vh] text-slate-100'>
           <h1 className='my-2 uppercase font-bold text-lg text-center'>Fill out the form</h1>
           <label className='mt-2 p-1' htmlFor='name'>Name:</label>
           <input className='mt-2 indent-2 p-1 rounded-full text-slate-950' type='text' id='name' placeholder='John Doe' required/>
@@ -37,7 +37,7 @@ const Contact = () => {
           <Link to='/'>
             <button type='button' className=' w-full mt-4 py-1 px-3 border-2 border-slate-100 text-slate-100 hover:bg-slate-100 hover:text-[#244AA5] rounded-full'>Send</button>
           </Link>
-        </div>
+        </form>
       </div>
       <Footer />
     </>
