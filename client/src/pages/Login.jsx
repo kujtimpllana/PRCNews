@@ -9,7 +9,7 @@ const Login = () => {
         </div>
         <form action="" className='flex flex-col'>
             <label className='mt-2 p-1' htmlFor='email'>Email:</label>
-            <input className='mt-2 indent-2 p-1 rounded-full text-slate-950' type='email' id='email' placeholder='example@example.ex' required/>
+            <input className='mt-2 indent-2 p-1 rounded-full text-slate-950' type='email' id='email' placeholder='example@example.com' required/>
 
             <label className='mt-2 p-1' htmlFor='password'>Password:</label>
             <input className='mt-2 indent-2 p-1 rounded-full text-slate-950' type='password' id='password' placeholder='********' required/>
