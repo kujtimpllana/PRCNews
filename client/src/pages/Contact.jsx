@@ -1,14 +1,9 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
 import logo from '../assets/img/prc_news_logo_black.svg'
 import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
     <>
-      <Header />
-      <Nav />
       <div className='my-12 w-full m-auto h-auto flex flex-col items-center md:flex-row md:w-[80%]'>
         <div className='bg-[#D0A650] p-12 h-[85vh] w-[80%] flex flex-1 flex-col justify-center items-center md:items-end  '>
           <img src={logo} alt='Contact PRC News' width='200px' className='mb-12'/>
@@ -39,7 +34,6 @@ const Contact = () => {
           </Link>
         </form>
       </div>
-      <Footer />
     </>
   )
 }

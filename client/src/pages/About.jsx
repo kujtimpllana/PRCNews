@@ -1,14 +1,9 @@
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Nav from '../components/Nav'
 import logo from '../assets/img/prc_news_logo_black.svg'
 import {Link} from 'react-router-dom'
 
 const About = () => {
   return (
     <>
-      <Header />
-      <Nav />
       <div className='flex justify-center items-center w-full h-96 mt-14'>
         <div className='bg-[#D0A650] w-[80%] flex flex-col items-center justify-center p-10 text-gray-950'>
           <img src={logo} alt='About PRC News' width='200px' />
@@ -21,7 +16,6 @@ const About = () => {
           </Link>
         </div>
       </div>
-      <Footer />
     </>
   )
 }

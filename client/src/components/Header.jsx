@@ -32,6 +32,9 @@ const Header = () => {
           <Link to='/admin'>
             <li className='py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950'>Admin</li>
           </Link>
+          <Link to='/write'>
+            <li className='py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950'>Write News</li>
+          </Link>
           <Link to='/login'>
             <li className='py-1 px-2 rounded-full border-2 border-[#244AA5] text-[#244AA5]  hover:bg-[#244AA5] hover:text-slate-100'>Login</li>
           </Link>
@@ -42,7 +45,7 @@ const Header = () => {
         <div onClick={handleNav} className='block md:hidden'>
           {nav ? <AiOutlineClose size={20} /> : <FaBars size={20} />}
         </div>
-        <div className={nav === true ? 'fixed left-0 top-0 w-[60%] h-full flex flex-col items-center border-r border-r-gray-900 bg-slate-950 ease-in-out duration-500' : 'fixed left-[-100%]'}>
+        <div className={nav === true ? 'z-[1] fixed left-0 top-0 w-[85%] h-full flex flex-col items-center border-r border-r-gray-900 bg-slate-950 ease-in-out duration-500' : 'fixed left-[-100%]'}>
           <img src={logo} alt='PRC News' width='200px' className='m-4'/>
           <ul className='flex flex-col gap-12 mt-12 text-lg font-bold w-full'>
             <Link to='/'>
@@ -56,6 +59,9 @@ const Header = () => {
             </Link>
             <Link to='/admin'>
               <li className='py-2 hover:bg-slate-100 hover:text-slate-950 text-center'>Admin</li>
+            </Link>
+            <Link to='/write'>
+              <li className='py-2 hover:bg-slate-100 hover:text-slate-950 text-center'>Write News</li>
             </Link>
             <hr />
             <Link to='/login'>

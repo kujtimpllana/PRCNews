@@ -13,15 +13,19 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import PostDetails from "./pages/PostDetails.jsx";
+import WriteNews from "./pages/WriteNews.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/" index exact element={<Home />} />
+      <Route path="/" index element={<Home />} />
       <Route path='/about' element={ <About/> }/>
       <Route path='/contact' element={ <Contact/> }/> 
       <Route path='/login' element={ <Login /> }/>
       <Route path='/register' element={ <Register /> }/>
+      <Route path='/post/:id' element={ <PostDetails /> }/>
+      <Route path='/write' element={ <WriteNews /> }/>
     </Route>
   )
 );
