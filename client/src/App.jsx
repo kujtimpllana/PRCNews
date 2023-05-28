@@ -17,7 +17,7 @@ function App() {
   return (
     <div className='app'>
       { (!location.pathname.match('/login') && !location.pathname.match('/register')) && <Header />  }
-      { (!location.pathname.match('/login') && !location.pathname.match('/register')) && <Nav />  }
+      { (!location.pathname.match('/login') && !location.pathname.match('/register') && (!location.pathname.match('/admin'))) && <Nav />  }
       <Outlet /> 
       { (!location.pathname.match('/login') && !location.pathname.match('/register')) && <Footer />  }
       <ToastContainer />

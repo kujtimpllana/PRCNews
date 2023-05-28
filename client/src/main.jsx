@@ -15,6 +15,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import PostDetails from "./pages/PostDetails.jsx";
 import WriteNews from "./pages/WriteNews.jsx";
+import Admin from "./pages/Admin.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path='/register' element={ <Register /> }/>
       <Route path='/post/:id' element={ <PostDetails /> }/>
       <Route path='/write' element={ <WriteNews /> }/>
+      <Route path='/admin' element={ <Admin /> }/>
     </Route>
   )
 );
