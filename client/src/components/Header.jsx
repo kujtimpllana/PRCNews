@@ -1,9 +1,11 @@
 import logo from '../assets/img/prc_news_logo.svg'
 import {FaBars} from 'react-icons/fa'
 import {AiOutlineClose} from 'react-icons/ai'
+import {FaUser} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { AuthContext } from '../context/authContext'
 
 const Header = () => {
 
@@ -12,6 +14,8 @@ const Header = () => {
   const handleNav = () => {
     setNav(!nav)
   }
+
+  const { currentUser, logout } = useContext(AuthContext)
 
   return (
     <div className='bg-[#000711] text-slate-100 uppercase'>
@@ -35,12 +39,22 @@ const Header = () => {
           <Link to='/write'>
             <li className='py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950'>Write News</li>
           </Link>
-          <Link to='/login'>
-            <li className='py-1 px-2 rounded-full border-2 border-[#244AA5] text-[#244AA5]  hover:bg-[#244AA5] hover:text-slate-100'>Login</li>
-          </Link>
-          <Link to='/register'>
-            <li className='py-1 px-2 rounded-full border-2 border-[#D0A650] text-[#D0A650] hover:bg-[#D0A650] hover:text-slate-900'>Sign Up</li>
-          </Link>
+          {currentUser?.fullname && 
+          <span className='text-[#D0A650] text-center flex justify-center items-center gap-1'><FaUser /> {currentUser?.fullname}</span>
+          }
+          {!currectUser?.fullname &&
+            <Link to='/login'>
+              <li className='py-1 px-2 rounded-full border-2 border-[#244AA5] text-[#244AA5]  hover:bg-[#244AA5] hover:text-slate-100'>Login</li>
+            </Link>
+          }
+          {!currentUser?.fullname &&
+            <Link to='/register'>
+              <li className='py-1 px-2 rounded-full border-2 border-[#D0A650] text-[#D0A650] hover:bg-[#D0A650] hover:text-slate-900'>Sign Up</li>
+            </Link>
+          }
+          {currentUser?.fullname &&
+            <button onClick={ logout } className='py-1 px-2 rounded-full border-2 border-red-900 text-red-900 hover:bg-red-900 hover:text-gray-100'>Logout</button>
+          }
         </ul>
         <div onClick={handleNav} className='block md:hidden'>
           {nav ? <AiOutlineClose size={20} /> : <FaBars size={20} />}
@@ -64,12 +78,22 @@ const Header = () => {
               <li className='py-2 hover:bg-slate-100 hover:text-slate-950 text-center'>Write News</li>
             </Link>
             <hr />
-            <Link to='/login'>
-              <li className='py-2 hover:bg-[#244AA5] hover:text-slate-100 text-center'>Login</li>
-            </Link>
-            <Link to='/register'>
-              <li className='py-2 hover:bg-[#D0A650] hover:text-slate-950 text-center'>Sign Up</li>
-            </Link>
+            {currentUser?.fullname && 
+              <span className='text-[#D0A650] text-center flex justify-center items-center gap-1'><FaUser /> {currentUser?.fullname}</span>
+            }
+            {!currentUser?.fullname &&
+              <Link to='/login'>
+                <li className='py-2 hover:bg-[#244AA5] hover:text-slate-100 text-center'>Login</li>
+              </Link>
+            }
+            {!currentUser?.fullname &&
+              <Link to='/register'>
+                <li className='py-2 hover:bg-[#D0A650] hover:text-slate-950 text-center'>Sign Up</li>
+              </Link>
+            }
+            {currentUser?.fullname &&
+              <button onClick={ logout } className='py-1 px-2 text-red-900 hover:bg-red-900 hover:text-gray-100'>Logout</button>
+            }
           </ul>
         </div>
       </div>

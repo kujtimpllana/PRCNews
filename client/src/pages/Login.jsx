@@ -1,10 +1,12 @@
 import logo from '../assets/img/prc_news_logo_black.svg'
 import {Link} from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from "react-toastify"
 
 import axios from "axios"
+
+import { AuthContext } from '../context/authContext'
 
 const Login = () => {
 
@@ -18,6 +20,8 @@ const Login = () => {
   const [isSubmit, setIsSubmit] = useState(false)
 
   const navigate = useNavigate()
+
+  const { login } = useContext(AuthContext)
 
   useEffect(() => {
     if (Object.keys(inputError).length === 0 && isSubmit && !err) {
@@ -38,7 +42,7 @@ const Login = () => {
     setInputError(handleValidation(formInput))
 
     try {
-      await axios.post("http://localhost:9000/api/auth/login", formInput)
+      await login(formInput)
      } catch(err) {
        setErr(err.response.data)
      }

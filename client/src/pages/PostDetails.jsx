@@ -14,7 +14,7 @@ const PostDetails = () => {
                     <p>Posted 2 days ago</p>
                 </div>
                 <div className='flex gap-[10px] text-gray-800'>
-                    <Link to={`/edit?edit=2`}><FaPen className=' hover:text-yellow-800' /></Link>
+                    <Link to={`/edit?edit=2`}><FaPen className='hover:text-yellow-800' /></Link>
                     <FaTrash className='hover:text-red-800 cursor-pointer' />
                 </div>
             </div>
