@@ -17,7 +17,7 @@ import PostDetails from "./pages/PostDetails.jsx";
 import WriteNews from "./pages/WriteNews.jsx";
 import Admin from "./pages/Admin.jsx";
 
-import { AuthContextProvider } from "./context/authContext.js";
+import { AuthContextProvider } from "./context/authContext.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
