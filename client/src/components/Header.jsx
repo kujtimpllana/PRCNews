@@ -42,7 +42,7 @@ const Header = () => {
           {currentUser?.fullname && 
           <span className='text-[#D0A650] text-center flex justify-center items-center gap-1'><FaUser /> {currentUser?.fullname}</span>
           }
-          {!currectUser?.fullname &&
+          {!currentUser?.fullname &&
             <Link to='/login'>
               <li className='py-1 px-2 rounded-full border-2 border-[#244AA5] text-[#244AA5]  hover:bg-[#244AA5] hover:text-slate-100'>Login</li>
             </Link>
