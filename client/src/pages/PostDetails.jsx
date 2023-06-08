@@ -29,19 +29,15 @@ const PostDetails = () => {
      } 
      fetchData()
   }, [postId])
-
-  /*
-  implement deleting a post by id logic
   
   const handleDelete = async () => {
     try {
-        await axios.delete(`http://localhost:9000/api/news/${postId}`)
+        await axios.delete(`http://localhost:9000/api/news/${postId}`, {withCredentials: "include"})
         navigate("/")
     } catch (err) {
         console.log(err)
     }
   }
-  */
 
   return (
     <div className='flex flex-col gap-10 px-6 mt-6 md:flex-row md:w-full'>
@@ -56,17 +52,17 @@ const PostDetails = () => {
                 {currentUser?.fullname === post?.fullname && 
                 <div className='flex gap-[10px] text-gray-800'>
                     <Link to={`/edit?edit=2`}><FaPen className='hover:text-yellow-800' /></Link>
-                    <FaTrash className='hover:text-red-800 cursor-pointer' />
+                    <FaTrash onClick={ handleDelete } className='hover:text-red-800 cursor-pointer' />
                 </div>
                 }
             </div>
-            <div className=''>
+            <div className='mb-10'>
                 <h1 className='font-bold text-lg mb-4'>{post.title}</h1>
                 {post.desc}
             </div>
         </div>
         <div className='md:flex-[2]'>
-            <PostSideBar />
+            <PostSideBar category={post.category} />
         </div>
     </div>
   )

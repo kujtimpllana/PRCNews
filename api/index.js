@@ -1,20 +1,22 @@
 import express from "express"
+import cookieParser from "cookie-parser"
+
 import newsRoute from "./routes/news.js"
 import usersRoute from "./routes/users.js"
 import authRoute from "./routes/auth.js"
 
 import cors from "cors"
-import cookieParser from "cookie-parser"
+
 
 const app = express()
-
-app.use(cookieParser())
 app.use(express.json())
 
 app.use(cors({
-    origin:"*",
+    origin:"http://localhost:5173",
     credentials: true,
 }))
+
+app.use(cookieParser())
 
 app.use("/api/news", newsRoute)
 app.use("/api/users", usersRoute)

@@ -46,7 +46,7 @@ export const login = (req, res) => {
         //using cookie-parser library
 
         res.cookie("access_token", token, {
-            httpOnly:true
+            httpOnly: true,
         }).status(200).json(other)
     })
 }

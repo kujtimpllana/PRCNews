@@ -1,5 +1,21 @@
-const PostSideBar = () => {
+import { useState, useEffect } from "react"
 
+const PostSideBar = ({category}) => {
+
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const res = await axios.get(`http://localhost:9000/api/news/?cat=${category}`)
+          setPosts(res.data)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    }, [category])
+
+    /*
     const posts = [
         {
           id: 1,
@@ -32,6 +48,7 @@ const PostSideBar = () => {
           img: 'https://images.pexels.com/photos/3970330/pexels-photo-3970330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
         }
       ]
+      */
 
   return (
     <div className='flex flex-col gap-[25px] mb-6 text-gray-800'>
