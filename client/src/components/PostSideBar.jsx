@@ -13,6 +13,8 @@ const PostSideBar = ({category}) => {
           console.log(err)
         }
       }
+
+      fetchData()
     }, [category])
 
     /*
