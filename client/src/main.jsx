@@ -16,6 +16,7 @@ import Register from "./pages/Register.jsx";
 import PostDetails from "./pages/PostDetails.jsx";
 import WriteNews from "./pages/WriteNews.jsx";
 import Admin from "./pages/Admin.jsx";
+import NotFound404 from "./pages/notFound404.jsx";
 
 import { AuthContextProvider } from "./context/authContext.jsx";
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path='/post/:id' element={ <PostDetails /> }/>
       <Route path='/write' element={ <WriteNews /> }/>
       <Route path='/admin' element={ <Admin /> }/>
+      <Route path='*' element={ <NotFound404 /> }/>
     </Route>
   )
 );

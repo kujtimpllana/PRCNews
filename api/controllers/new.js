@@ -12,7 +12,7 @@ export const getNews = (req, res) => {
 }
 
 export const getSingleNew = (req, res) => {
-    const q = "SELECT `fullname`, `title`, `desc`, `img`, `profile_photo`, `category`, `date` FROM users as u JOIN news as n ON u.id=n.uid WHERE n.id = ?"
+    const q = "SELECT n.id, `fullname`, `title`, `desc`, `img`, `profile_photo`, `category`, `date` FROM users u JOIN news n ON u.id=n.uid WHERE n.id = ?"
     //req.params.id comes from ':id' endpoint
     db.query(q, [req.params.id], (err, data) => {
         if(err) return res.status(500).json(err)
@@ -23,7 +23,28 @@ export const getSingleNew = (req, res) => {
 
 
 export const addNew = (req, res) => {
-    res.json("test new controller")
+    const token = req.cookies.access_token
+    if(!token) return res.status(401).json("Not authorized!")
+
+    jwt.verify(token, "jwtkey", (err, userInfo) => {
+        if(err) return res.status(403).json("Token is not valid!")
+
+        const q = "INSERT INTO news (`title`, `desc`, `img`, `category`, `date`, `uid`) VALUES (?)"
+
+        const values = [
+            req.body.title,
+            req.body.desc,
+            req.body.img,
+            req.body.category,
+            req.body.date,
+            userInfo.id
+        ]
+
+        db.query(q, [values], (err, data) => {
+            if(err) return res.status(500).json(err)
+            return res.json("Post has been created.")
+        })
+    })
 }
 
 export const deleteNew = (req, res) => {
@@ -45,5 +66,25 @@ export const deleteNew = (req, res) => {
 }
 
 export const updateNew = (req, res) => {
-    res.json("test new controller")
+    const token = req.cookies.access_token
+    if(!token) return res.status(401).json("Not authorized!")
+
+    jwt.verify(token, "jwtkey", (err, userInfo) => {
+        if(err) return res.status(403).json("Token is not valid!")
+
+        const postId = req.params.id
+        const q = "UPDATE news SET `title` = ?, `desc` = ?, `img` = ?, `category` = ? WHERE `id` = ? AND `uid` = ?"
+
+        const values = [
+            req.body?.title,
+            req.body?.desc,
+            req.body?.img,
+            req.body?.category,
+        ]
+
+        db.query(q, [...values, postId, userInfo.id], (err, data) => {
+            if(err) return res.status(500).json(err)
+            return res.json("Post has been updated.")
+        })
+    })
 }

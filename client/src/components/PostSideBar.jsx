@@ -58,7 +58,7 @@ const PostSideBar = ({category}) => {
         <h1 className='font-bold text-lg'>You also might be interested in</h1>
         { posts.map(post => (
             <div className='flex flex-col gap-[10px]' key={ post.id }>
-                <img src={ post.img } className='w-[100%] h-[200px] object-cover' alt='' />
+                <img src={`../uploads/${post?.img}`} className='w-[100%] h-[200px] object-cover' alt='' />
                 <h2 className='font-bold text-md'>{ post.title }</h2>
                 <button className="w-[115px] h-[35px] border-2 border-gray-800 hover:bg-gray-800 hover:text-gray-100">Read more</button>
             </div>

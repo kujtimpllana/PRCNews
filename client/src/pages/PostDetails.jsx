@@ -39,10 +39,15 @@ const PostDetails = () => {
     }
   }
 
+  const getText = (html) => {
+    const document = new DOMParser().parseFromString(html, "text/html")
+    return document.body.textContent
+  }
+
   return (
     <div className='flex flex-col gap-10 px-6 mt-6 md:flex-row md:w-full'>
         <div className='md:flex-[5]'>
-            <img src={post?.img} className='w-full h-[450px] object-cover rounded' alt={`Image of/about ${post?.title}`} />
+            <img src={`../uploads/${post?.img}`} className='w-full h-[450px] object-cover rounded' alt={`Image of/about ${post?.title}`} />
             <div className='flex items-center gap-[10px] my-6'>
                 <img src={post?.profile_photo} className='w-[60px] h-[60px] rounded-full object-cover' alt='' />
                 <div className='text-gray-800'>
@@ -51,14 +56,14 @@ const PostDetails = () => {
                 </div>
                 {currentUser?.fullname === post?.fullname && 
                 <div className='flex gap-[10px] text-gray-800'>
-                    <Link to={`/edit?edit=2`}><FaPen className='hover:text-yellow-800' /></Link>
+                    <Link to={`/write?edit=2`} state={post}><FaPen className='hover:text-yellow-800' /></Link>
                     <FaTrash onClick={ handleDelete } className='hover:text-red-800 cursor-pointer' />
                 </div>
                 }
             </div>
             <div className='mb-10'>
-                <h1 className='font-bold text-lg mb-4'>{post.title}</h1>
-                {post.desc}
+                <h1 className='font-bold text-lg mb-4'>{getText(post.title)}</h1>
+                {getText(post.desc)}
             </div>
         </div>
         <div className='md:flex-[2]'>
