@@ -1,51 +1,52 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom'
-import axios from "axios"
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
+  const [posts, setPosts] = useState([]);
 
-  const [posts, setPosts] = useState([])
+  const category = useLocation().search;
 
-  const category = useLocation().search
-      
   useEffect(() => {
-     const fetchData = async () => {
+    const fetchData = async () => {
       try {
-         const res = await axios.get(`http://localhost:9000/api/news/${category}`)
-         setPosts(res.data) 
+        const res = await axios.get(
+          `http://localhost:9000/api/news/${category}`
+        );
+        setPosts(res.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-     } 
-     fetchData()
-  }, [category])
+    };
+    fetchData();
+  }, [category]);
 
   const setColor = (cat) => {
-    let color = ""
+    let color = "";
     switch (cat) {
       case "politics":
-        color = "slategray"
-        break
+        color = "slategray";
+        break;
       case "sport":
-        color = "green"
-        break
+        color = "green";
+        break;
       case "fashion":
-        color = "navy"
-        break
+        color = "navy";
+        break;
       case "technology":
-        color = "teal"
-        break
+        color = "teal";
+        break;
       case "auto":
-        color = "maroon"
-        break
+        color = "maroon";
+        break;
       case "fun":
-        color = "chocolate"
-        break
+        color = "chocolate";
+        break;
       default:
-        color = ""
+        color = "";
     }
-    return color
-  }
+    return color;
+  };
 
   // const posts = [
   //   {
@@ -81,32 +82,58 @@ const Home = () => {
   // ]
 
   const getText = (html) => {
-    const document = new DOMParser().parseFromString(html, "text/html")
-    return document.body.textContent
-  }
+    const document = new DOMParser().parseFromString(html, "text/html");
+    return document.body.textContent;
+  };
 
   return (
-    <div className=''>
-      <h1 className='font-bold text-2xl m-4 text-slate-950'>Latest News</h1>
+    <div className="">
+      <h1 className="font-bold text-2xl m-4 text-slate-950">Latest News</h1>
 
-      { posts.map((post) => (
-          
-          <div className='overflow-hidden p-2 w-full h-auto flex flex-col my-6 border-2 border-gray-300 rounded-md shadow-lg md:flex-row md:items-center md:w-[60%] md:ml-10' key={ post.id }>
+      {posts.map((post) => (
+        <div
+          className="overflow-hidden p-2 w-full h-auto flex flex-col my-6 border-2 border-gray-300 rounded-md shadow-lg md:flex-row md:items-center md:w-[60%] md:ml-10"
+          key={post.id}
+        >
+          <Link
+            to={`/post/${post.id}`}
+            className="w-[100%] h-[165px] flex items-center md:w-[55%] md:h-[250px]"
+          >
+            <img
+              src={`../uploads/${post.img}`}
+              alt={post.title}
+              className="h-full w-full object-cover rounded-md"
+            />
+          </Link>
 
-              <Link to={`/post/${ post.id }`} className='w-[100%] h-[165px] flex items-center md:w-[55%] md:h-[250px]'>
-                <img src={`../uploads/${ post.img }`} alt={ post.title } className='h-full w-full object-cover rounded-md' />
-              </Link>
-
-              <Link to={`/post/${ post.id }`} className='w-[100%] h-[100px] flex flex-col mt-3 md:justify-evenly md:px-4 md:w-[50%] md:h-[150px]'>
-                <p style={{color: setColor(post.category), textTransform: "uppercase", fontWeight: "bold"}}>{post.category}</p>
-                <h1 className='font-bold text-lg md:text-xl'>{ getText(post.title).length > 40 ? getText(post.title).substring(0, 40).concat('...') : getText(post.title) }</h1>
-                <p className='text-gray-600 md:text-md'>{ getText(post.desc).length > 80 ? getText(post.desc).substring(0, 80).concat('...') : getText(post.desc) }</p>
-              </Link>
-          </div>
-          
-      )) }
+          <Link
+            to={`/post/${post.id}`}
+            className="w-[100%] h-[100px] flex flex-col mt-3 md:justify-evenly md:px-4 md:w-[50%] md:h-[150px]"
+          >
+            <p
+              style={{
+                color: setColor(post.category),
+                textTransform: "uppercase",
+                fontWeight: "bold",
+              }}
+            >
+              {post.category}
+            </p>
+            <h1 className="font-bold text-lg md:text-xl">
+              {getText(post.title).length > 40
+                ? getText(post.title).substring(0, 40).concat("...")
+                : getText(post.title)}
+            </h1>
+            <p className="text-gray-600 md:text-md">
+              {getText(post.desc).length > 80
+                ? getText(post.desc).substring(0, 80).concat("...")
+                : getText(post.desc)}
+            </p>
+          </Link>
+        </div>
+      ))}
     </div>
-  ); 
+  );
 };
 
-export default Home
+export default Home;

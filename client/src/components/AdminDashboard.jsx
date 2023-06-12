@@ -1,16 +1,23 @@
-const AdminDashboard = () => {
-  return (
-    <nav className='flex justify-center items-center w-full md:h-12 bg-slate-100 text-gray-950'>
-      <ul className='flex flex-col gap-y-3 md:flex-row gap-x-6 text-center py-4'>
-        <li className='py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded-full'>Test</li>
-        <li className='py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded-full'>Test</li>
-        <li className='py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded-full'>Test</li>
-        <li className='py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded-full'>Test</li>
-        <li className='py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded-full'>Test</li>
-        <li className='py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded-full'>Test</li>
-      </ul>
-    </nav>
-  )
-}
+import { useContext } from "react";
+import { FaUserSecret } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-export default AdminDashboard
+import { AuthContext } from "../context/authContext";
+
+const AdminDashboard = () => {
+  const { currentUser } = useContext(AuthContext);
+
+  return (
+    <nav className="flex justify-start px-3 gap-[5px] items-center w-full md:h-12 bg-slate-100 text-gray-950">
+      <div>
+        <h1 className="font-bold">Administrator:</h1>
+      </div>
+      <div className="flex gap-[5px]">
+        <FaUserSecret size={25} />
+        <p>{currentUser?.role === "1" && currentUser?.fullname}</p>
+      </div>
+    </nav>
+  );
+};
+
+export default AdminDashboard;

@@ -1,24 +1,25 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const PostSideBar = ({category}) => {
+const PostSideBar = ({ category }) => {
+  const [posts, setPosts] = useState([]);
 
-    const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const res = await axios.get(`http://localhost:9000/api/news/?cat=${category}`)
-          setPosts(res.data)
-        } catch (err) {
-          console.log(err)
-        }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:9000/api/news/?cat=${category}`
+        );
+        setPosts(res.data);
+      } catch (err) {
+        console.log(err);
       }
+    };
 
-      fetchData()
-    }, [category])
+    fetchData();
+  }, [category]);
 
-    /*
+  /*
     const posts = [
         {
           id: 1,
@@ -54,17 +55,23 @@ const PostSideBar = ({category}) => {
       */
 
   return (
-    <div className='flex flex-col gap-[25px] mb-6 text-gray-800'>
-        <h1 className='font-bold text-lg'>You also might be interested in</h1>
-        { posts.map(post => (
-            <div className='flex flex-col gap-[10px]' key={ post.id }>
-                <img src={`../uploads/${post?.img}`} className='w-[100%] h-[200px] object-cover' alt='' />
-                <h2 className='font-bold text-md'>{ post.title }</h2>
-                <button className="w-[115px] h-[35px] border-2 border-gray-800 hover:bg-gray-800 hover:text-gray-100">Read more</button>
-            </div>
-        )) }
+    <div className="flex flex-col gap-[25px] mb-6 text-gray-800">
+      <h1 className="font-bold text-lg">You also might be interested in</h1>
+      {posts.map((post) => (
+        <div className="flex flex-col gap-[10px]" key={post.id}>
+          <img
+            src={`../uploads/${post?.img}`}
+            className="w-[100%] h-[200px] object-cover"
+            alt=""
+          />
+          <h2 className="font-bold text-md">{post.title}</h2>
+          <button className="w-[115px] h-[35px] border-2 border-gray-800 hover:bg-gray-800 hover:text-gray-100">
+            Read more
+          </button>
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default PostSideBar
+export default PostSideBar;
