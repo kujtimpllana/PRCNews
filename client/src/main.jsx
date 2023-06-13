@@ -17,6 +17,7 @@ import PostDetails from "./pages/PostDetails.jsx";
 import WriteNews from "./pages/WriteNews.jsx";
 import Admin from "./pages/Admin.jsx";
 import NotFound404 from "./pages/NotFound404.jsx";
+import AdminEdit from "./pages/AdminEdit.jsx";
 
 import { AuthContextProvider } from "./context/authContext.jsx";
 
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="/post/*" element={<NotFound404 />} />
       <Route path="/write" element={<WriteNews />} />
       <Route path="/admin" element={<Admin />} />
+      <Route path="/admin/update/:id" element={<AdminEdit />} />
       <Route path="*" element={<NotFound404 />} />
     </Route>
   )

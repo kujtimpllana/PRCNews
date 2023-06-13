@@ -47,7 +47,6 @@ const Admin = () => {
       await axios.delete(`http://localhost:9000/api/users/${id}`, {
         withCredentials: "include",
       });
-      setUsers(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -109,7 +108,7 @@ const Admin = () => {
                   <td className="p-[8px]">{user?.email}</td>
                   <td className="p-[8px]">{user?.role}</td>
                   <td className="py-[8px]">
-                    <Link to="/admin">
+                    <Link to={`/admin/update/${user.id}`}>
                       <FaPen className="hover:text-yellow-800" />
                     </Link>
                   </td>
@@ -130,7 +129,7 @@ const Admin = () => {
                   <td className="p-[8px]">{user?.email}</td>
                   <td className="p-[8px]">{user?.role}</td>
                   <td className="py-[8px]">
-                    <Link to="/admin">
+                    <Link to={`/admin/update/${user.id}`}>
                       <FaPen className="hover:text-yellow-800" />
                     </Link>
                   </td>
