@@ -1,9 +1,9 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import newsRoute from "./routes/news.js";
-import usersRoute from "./routes/users.js";
-import authRoute from "./routes/auth.js";
+import newsRoute from "./routes/newsRoute.js";
+import usersRoute from "./routes/usersRoute.js";
+import authRoute from "./routes/authRoute.js";
 
 import cors from "cors";
 import multer from "multer";
