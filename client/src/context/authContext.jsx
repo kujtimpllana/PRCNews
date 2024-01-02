@@ -11,13 +11,12 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (formInput) => {
     const res = await axios.post(
       "http://localhost:9000/api/auth/login",
-      formInput,
-      { withCredentials: true }
+      formInput
     );
     setCurrentUser(res.data);
   };
 
-  const logout = async (formInput) => {
+  const logout = async () => {
     await axios.post("http://localhost:9000/api/auth/logout");
     setCurrentUser(null);
   };

@@ -5,4 +5,5 @@ export const db = mysql.createConnection({
   user: "root",
   password: "toor",
   database: "prc_news",
+  multipleStatements: false,
 });

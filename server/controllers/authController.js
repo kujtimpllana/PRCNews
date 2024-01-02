@@ -8,7 +8,7 @@ export const register = (req, res) => {
   db.query(q, [req.body.email], (err, data) => {
     if (err) return res.json(err);
     if (data.length)
-      return res.status(409).json("Invalid values, please try again!");
+      return res.status(409).json("Invalid values, please try again.");
 
     //password hashing
     const salt = bcrypt.genSaltSync(10);
