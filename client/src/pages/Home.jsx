@@ -54,12 +54,12 @@ const Home = () => {
   };
 
   return (
-    <div className="">
+    <div>
       <h1 className="font-bold text-2xl m-4 text-slate-950">Latest News</h1>
 
       {posts.map((post) => (
         <div
-          className="overflow-hidden p-2 w-full h-auto flex flex-col my-6 border-2 border-gray-300 rounded-md shadow-lg md:flex-row md:items-center md:w-[60%] md:ml-10"
+          className="overflow-hidden p-2 w-full h-auto flex flex-col my-6 border-2 border-gray-300 rounded-md shadow-lg hover:border-gray-500 md:flex-row md:items-center md:w-[60%] md:ml-10 transition-all"
           key={post.id}
         >
           <Link
@@ -82,6 +82,7 @@ const Home = () => {
                 color: setColor(post.category),
                 textTransform: "uppercase",
                 fontWeight: "bold",
+                fontFamily: "Roboto Slab",
               }}
             >
               {post.category}

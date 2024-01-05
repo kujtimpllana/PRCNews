@@ -58,7 +58,7 @@ const AdminEdit = () => {
             Full Name:
           </label>
           <input
-            className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+            className="mt-2 indent-2 p-1 rounded text-slate-950"
             type="text"
             id="fullname"
             name="fullname"
@@ -71,7 +71,7 @@ const AdminEdit = () => {
             Email:
           </label>
           <input
-            className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+            className="mt-2 indent-2 p-1 rounded text-slate-950"
             type="text"
             id="email"
             name="email"
@@ -84,7 +84,7 @@ const AdminEdit = () => {
             Role:
           </label>
           <input
-            className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+            className="mt-2 indent-2 p-1 rounded text-slate-950"
             type="text"
             id="role"
             name="role"
@@ -100,7 +100,7 @@ const AdminEdit = () => {
             </Link>
             .
           </p>
-          <button className=" w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded-full">
+          <button className=" w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded">
             Confirm Changes
           </button>
         </form>

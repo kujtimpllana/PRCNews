@@ -24,60 +24,62 @@ const Header = () => {
         </Link>
         <ul className="hidden md:flex items-center gap-6 font-bold">
           <Link to="/">
-            <li className="py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950">
+            <li className="font-poppins py-1 px-2 rounded hover:bg-slate-100 hover:text-slate-950 transition-all">
               Home
             </li>
           </Link>
           <Link to="/about">
-            <li className="py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950">
+            <li className="font-poppins py-1 px-2 rounded hover:bg-slate-100 hover:text-slate-950 transition-all">
               About
             </li>
           </Link>
           <Link to="/contact">
-            <li className="py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950">
+            <li className="font-poppins py-1 px-2 rounded hover:bg-slate-100 hover:text-slate-950 transition-all">
               Contact
             </li>
           </Link>
           {currentUser?.role === "1" && (
             <Link to="/admin">
-              <li className="py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950">
-                Admin
+              <li className="font-poppins py-1 px-2 rounded hover:bg-slate-100 hover:text-slate-950 transition-all">
+                Dashboard
               </li>
             </Link>
           )}
           {currentUser?.role === "2" && (
             <Link to="/write">
-              <li className="py-1 px-2 rounded-full hover:bg-slate-100 hover:text-slate-950">
+              <li className="font-poppins py-1 px-2 rounded hover:bg-slate-100 hover:text-slate-950 transition-all">
                 Write News
               </li>
             </Link>
           )}
           {currentUser?.fullname && (
-            <span className="text-[#D0A650] text-center flex justify-center items-center gap-1">
+            <span className="font-poppins text-[#D0A650] text-center flex justify-center items-center gap-1">
               <FaUser /> {currentUser?.fullname}
             </span>
           )}
           {!currentUser?.fullname && (
             <Link to="/login">
-              <li className="py-1 px-2 rounded-full border-2 border-[#244AA5] text-[#244AA5]  hover:bg-[#244AA5] hover:text-slate-100">
+              <li className="font-poppins py-1 px-2 rounded border-2 border-[#244AA5] text-[#244AA5]  hover:bg-[#244AA5] hover:text-slate-100 transition-all">
                 Login
               </li>
             </Link>
           )}
           {!currentUser?.fullname && (
             <Link to="/register">
-              <li className="py-1 px-2 rounded-full border-2 border-[#D0A650] text-[#D0A650] hover:bg-[#D0A650] hover:text-slate-900">
+              <li className="font-poppins py-1 px-2 rounded border-2 border-[#D0A650] text-[#D0A650] hover:bg-[#D0A650] hover:text-slate-900 transition-all">
                 Sign Up
               </li>
             </Link>
           )}
           {currentUser?.fullname && (
-            <button
-              onClick={logout}
-              className="py-1 px-2 rounded-full border-2 border-red-900 text-red-900 hover:bg-red-900 hover:text-gray-100"
-            >
-              Logout
-            </button>
+            <Link to="/">
+              <button
+                onClick={logout}
+                className="font-poppins py-1 px-2 rounded border-2 border-red-900 text-red-900 hover:bg-red-900 hover:text-gray-100 transition-all"
+              >
+                Logout
+              </button>
+            </Link>
           )}
         </ul>
         <div onClick={handleNav} className="block md:hidden">
@@ -86,68 +88,70 @@ const Header = () => {
         <div
           className={
             nav === true
-              ? "z-[1] fixed left-0 top-0 w-[85%] h-full flex flex-col items-center border-r border-r-gray-900 bg-slate-950 ease-in-out duration-500"
+              ? "z-[1] fixed left-0 top-0 w-[85%] h-full flex flex-col items-center border-r border-r-gray-900 bg-slate-950 transition-all"
               : "fixed left-[-100%]"
           }
         >
           <img src={logo} alt="PRC News" width="200px" className="m-4" />
           <ul className="flex flex-col gap-12 mt-12 text-lg font-bold w-full">
             <Link to="/">
-              <li className="py-2 hover:bg-slate-100 hover:text-slate-950 text-center">
+              <li className="font-poppins py-2 hover:bg-slate-100 hover:text-slate-950 text-center transition-all">
                 Home
               </li>
             </Link>
             <Link to="/about">
-              <li className="py-2 hover:bg-slate-100 hover:text-slate-950 text-center">
+              <li className="font-poppins py-2 hover:bg-slate-100 hover:text-slate-950 text-center transition-all">
                 About
               </li>
             </Link>
             <Link to="/contact">
-              <li className="py-2 hover:bg-slate-100 hover:text-slate-950 text-center">
+              <li className="font-poppins py-2 hover:bg-slate-100 hover:text-slate-950 text-center transition-all">
                 Contact
               </li>
             </Link>
             {currentUser?.role === "1" && (
               <Link to="/admin">
-                <li className="py-2 hover:bg-slate-100 hover:text-slate-950 text-center">
-                  Admin
+                <li className="font-poppins py-2 hover:bg-slate-100 hover:text-slate-950 text-center transition-all">
+                  Dashboard
                 </li>
               </Link>
             )}
             {currentUser?.role === "2" && (
               <Link to="/write">
-                <li className="py-2 hover:bg-slate-100 hover:text-slate-950 text-center">
+                <li className="font-poppins py-2 hover:bg-slate-100 hover:text-slate-950 text-center transition-all">
                   Write News
                 </li>
               </Link>
             )}
             <hr />
             {currentUser?.fullname && (
-              <span className="text-[#D0A650] text-center flex justify-center items-center gap-1">
+              <span className="font-poppins text-[#D0A650] text-center flex justify-center items-center gap-1">
                 <FaUser /> {currentUser?.fullname}
               </span>
             )}
             {!currentUser?.fullname && (
               <Link to="/login">
-                <li className="py-2 hover:bg-[#244AA5] hover:text-slate-100 text-center">
+                <li className="font-poppins py-2 hover:bg-[#244AA5] hover:text-slate-100 text-center transition-all">
                   Login
                 </li>
               </Link>
             )}
             {!currentUser?.fullname && (
               <Link to="/register">
-                <li className="py-2 hover:bg-[#D0A650] hover:text-slate-950 text-center">
+                <li className="font-poppins py-2 hover:bg-[#D0A650] hover:text-slate-950 text-center transition-all">
                   Sign Up
                 </li>
               </Link>
             )}
             {currentUser?.fullname && (
-              <button
-                onClick={logout}
-                className="py-1 px-2 text-red-900 hover:bg-red-900 hover:text-gray-100"
-              >
-                Logout
-              </button>
+              <Link to="/">
+                <button
+                  onClick={logout}
+                  className="font-poppins py-1 px-2 text-red-900 hover:bg-red-900 hover:text-gray-100 transition-all"
+                >
+                  Logout
+                </button>
+              </Link>
             )}
           </ul>
         </div>

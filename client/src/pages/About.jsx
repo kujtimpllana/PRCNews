@@ -22,7 +22,7 @@ const About = () => {
           <Link to="/contact">
             <button
               type="button"
-              className="mt-4 py-1 px-3 border-2 border-[#244AA5]  text-[#244AA5] hover:bg-[#244AA5] hover:text-slate-100 rounded-full"
+              className="mt-4 py-1 px-3 border-2 border-[#244AA5]  text-[#244AA5] hover:bg-[#244AA5] hover:text-slate-100 rounded transition-all"
             >
               Contact PRCNews
             </button>

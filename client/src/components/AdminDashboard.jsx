@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { FaUserSecret } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/authContext";
 

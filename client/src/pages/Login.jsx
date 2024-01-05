@@ -1,10 +1,8 @@
 import logo from "../assets/img/prc_news_logo_black.svg";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
-import axios from "axios";
 
 import { AuthContext } from "../context/authContext";
 import { loginValidation } from "./validations/authValidation";
@@ -22,12 +20,11 @@ const Login = () => {
   const onSubmit = async (values) => {
     try {
       const response = await login(values);
-      if (response && !err) {
-        toast.success("Successfully logged in");
-        setTimeout(() => {
-          navigate("/");
-        }, 2500);
-      }
+
+      toast.success("Successfully logged in");
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
     } catch (error) {
       setErr("Something went wrong, please try again!");
     }
@@ -49,7 +46,7 @@ const Login = () => {
           Email:
         </label>
         <input
-          className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+          className="mt-2 indent-2 p-1 rounded text-slate-950"
           type="text"
           id="email"
           name="email"
@@ -57,10 +54,11 @@ const Login = () => {
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
+          autoFocus
         />
 
         {errors.email && (
-          <small className="bg-red-950 text-gray-100 rounded-full text-center p-1 mt-1">
+          <small className="bg-red-950 text-gray-100 rounded text-center p-1 mt-1">
             {errors.email}
           </small>
         )}
@@ -69,7 +67,7 @@ const Login = () => {
           Password:
         </label>
         <input
-          className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+          className="mt-2 indent-2 p-1 rounded text-slate-950"
           type="password"
           id="password"
           name="password"
@@ -80,13 +78,13 @@ const Login = () => {
         />
 
         {errors.password && (
-          <small className="bg-red-950 text-gray-100 rounded-full text-center p-1 mt-1">
+          <small className="bg-red-950 text-gray-100 rounded text-center p-1 mt-1">
             {errors.password}
           </small>
         )}
 
         {err && (
-          <small className="bg-red-950 text-gray-100 rounded-full text-center p-1 mt-1">
+          <small className="bg-red-950 text-gray-100 rounded text-center p-1 mt-1">
             {err}
           </small>
         )}
@@ -101,7 +99,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className=" w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded-full"
+          className=" w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded transition-all"
         >
           Login
         </button>

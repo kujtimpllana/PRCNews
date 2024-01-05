@@ -31,7 +31,7 @@ const Contact = () => {
             Name:
           </label>
           <input
-            className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+            className="mt-2 indent-2 p-1 rounded text-slate-950"
             type="text"
             id="name"
             placeholder="John Doe"
@@ -42,7 +42,7 @@ const Contact = () => {
             Email:
           </label>
           <input
-            className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+            className="mt-2 indent-2 p-1 rounded text-slate-950"
             type="email"
             id="email"
             placeholder="example@example.ex"
@@ -53,7 +53,7 @@ const Contact = () => {
             Phone Number:
           </label>
           <input
-            className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+            className="mt-2 indent-2 p-1 rounded text-slate-950"
             type="text"
             id="number"
             placeholder="+383XXXXXXXX"
@@ -64,7 +64,7 @@ const Contact = () => {
             Subject:
           </label>
           <input
-            className="mt-2 indent-2 p-1 rounded-full text-slate-950"
+            className="mt-2 indent-2 p-1 rounded text-slate-950"
             type="text"
             id="subject"
             placeholder="Subject"
@@ -86,7 +86,7 @@ const Contact = () => {
           <Link to="/">
             <button
               type="button"
-              className=" w-full mt-4 py-1 px-3 border-2 border-slate-100 text-slate-100 hover:bg-slate-100 hover:text-[#244AA5] rounded-full"
+              className=" w-full mt-4 py-1 px-3 border-2 border-slate-100 text-slate-100 hover:bg-slate-100 hover:text-[#244AA5] rounded transition-all"
             >
               Send
             </button>

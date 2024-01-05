@@ -54,11 +54,13 @@ const PostDetails = () => {
           alt={`Image of/about ${post?.title}`}
         />
         <div className="flex items-center gap-[10px] my-6">
-          <img
-            src={post?.profile_photo}
-            className="w-[60px] h-[60px] rounded-full object-cover"
-            alt=""
-          />
+          {post.profile_photo && (
+            <img
+              src={post?.profile_photo}
+              className="w-[60px] h-[60px] rounded-full object-cover"
+              alt=""
+            />
+          )}
           <div className="text-gray-800">
             <span className="font-bold">{post?.fullname}</span>
             <p>Posted {moment(post.date).fromNow()}</p>
@@ -77,11 +79,11 @@ const PostDetails = () => {
         </div>
         <div className="mb-10">
           <h1 className="font-bold text-lg mb-4">{getText(post.title)}</h1>
-          {getText(post.desc)}
+          <p className="text-justify">{getText(post.desc)}</p>
         </div>
       </div>
       <div className="md:flex-[2]">
-        <PostSideBar category={post.category} />
+        <PostSideBar category={post.category} postId={postId} />
       </div>
     </div>
   );

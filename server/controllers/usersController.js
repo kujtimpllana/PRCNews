@@ -1,5 +1,4 @@
 import { db } from "../db.js";
-import jwt from "jsonwebtoken";
 
 export const getUsers = (req, res) => {
   const q = req.query.user
@@ -26,8 +25,7 @@ export const getSingleUser = (req, res) => {
 
 export const editUser = (req, res) => {
   const userId = req.params.id;
-  const q =
-    "UPDATE users SET fullname = ?, email = ?, role = ? WHERE id = ?";
+  const q = "UPDATE users SET fullname = ?, email = ?, role = ? WHERE id = ?";
 
   const values = [req.body.fullname, req.body.email, req.body.role];
 
