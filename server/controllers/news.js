@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
 
-export const getPost = (req, res) => {
+export const getPosts = (req, res) => {
   const q = req.query.cat
     ? "SELECT * FROM news WHERE category=?"
     : "SELECT * FROM news";
