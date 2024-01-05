@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
 
-export const getNews = (req, res) => {
+export const getPost = (req, res) => {
   const q = req.query.cat
     ? "SELECT * FROM news WHERE category=?"
     : "SELECT * FROM news";
@@ -13,7 +13,7 @@ export const getNews = (req, res) => {
   });
 };
 
-export const getSingleNew = (req, res) => {
+export const getSinglePost = (req, res) => {
   const q =
     "SELECT n.id, `fullname`, `title`, `desc`, `img`, `profile_photo`, `category`, `date` FROM users u JOIN news n ON u.id=n.uid WHERE n.id = ?";
   //req.params.id comes from ':id' endpoint
@@ -24,7 +24,7 @@ export const getSingleNew = (req, res) => {
   });
 };
 
-export const addNew = (req, res) => {
+export const addPost = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authorized!");
 
@@ -50,7 +50,7 @@ export const addNew = (req, res) => {
   });
 };
 
-export const deleteNew = (req, res) => {
+export const deletePost = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authorized!");
 
@@ -68,7 +68,7 @@ export const deleteNew = (req, res) => {
   });
 };
 
-export const updateNew = (req, res) => {
+export const updatePost = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authorized!");
 

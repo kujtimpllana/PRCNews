@@ -1,9 +1,9 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import newsRoute from "./routes/newsRoute.js";
-import usersRoute from "./routes/usersRoute.js";
-import authRoute from "./routes/authRoute.js";
+import news from "./routes/news.js";
+import users from "./routes/users.js";
+import auth from "./routes/auth.js";
 
 import cors from "cors";
 import multer from "multer";
@@ -36,9 +36,9 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
   res.status(200).json(file?.filename);
 });
 
-app.use("/api/news", newsRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/auth", authRoute);
+app.use("/api/news", news);
+app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 app.listen(9000, () => {
   console.log("Connected!");
