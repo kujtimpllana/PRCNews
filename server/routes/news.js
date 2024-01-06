@@ -3,6 +3,7 @@ import {
   addPost,
   deletePost,
   getPosts,
+  getPostsByFixedSize,
   getSinglePost,
   updatePost,
 } from "../controllers/news.js";
@@ -10,6 +11,7 @@ import {
 const router = express.Router();
 
 router.get("/", getPosts);
+router.get("/fixed", getPostsByFixedSize)
 router.get("/:id", getSinglePost);
 router.post("/", addPost);
 router.delete("/:id", deletePost);

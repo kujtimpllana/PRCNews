@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 
 export const getPosts = (req, res) => {
   const q = req.query.cat
-    ? "SELECT * FROM news WHERE category=?"
-    : "SELECT * FROM news";
+    ? "SELECT * FROM news WHERE category=? ORDER BY date DESC LIMIT 10"
+    : "SELECT * FROM news ORDER BY date DESC LIMIT 10";
 
   db.query(q, [req.query.cat], (err, data) => {
     if (err) return res.status(500).send(err);
@@ -12,6 +12,19 @@ export const getPosts = (req, res) => {
     return res.status(200).json(data);
   });
 };
+
+let INDEX = 10
+export const getPostsByFixedSize = (req, res) => {
+  if (INDEX >= 1000000) INDEX = 0;
+  INDEX += 10;
+  const q = req.query.cat ? `SELECT DISTINCT * FROM news WHERE category=? ORDER BY date DESC LIMIT ${INDEX}` : `SELECT DISTINCT * FROM news ORDER BY date DESC LIMIT ${INDEX}`;
+
+  db.query(q, [req.query.cat], (err, data) => {
+    if (err) return res.status(500).json(err);
+
+    return res.status(200).json(data);
+  })
+}
 
 export const getSinglePost = (req, res) => {
   const q =

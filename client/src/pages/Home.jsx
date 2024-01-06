@@ -53,6 +53,15 @@ const Home = () => {
     return document.body.textContent;
   };
 
+  const fetchPosts = async () => {
+    try {
+      const res = await axios.get(`http://localhost:9000/api/news/fixed/${category}`);
+      setPosts(res.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <h1 className="font-bold text-2xl m-4 text-slate-950">Latest News</h1>
@@ -100,6 +109,7 @@ const Home = () => {
           </Link>
         </div>
       ))}
+      <button type="button" className="py-1 px-2 ml-10 mb-5 rounded text-slate-100 bg-slate-900 hover:bg-slate-950 transition-all" onClick={() => fetchPosts(10)}>Load More</button>
     </div>
   );
 };
