@@ -8,6 +8,7 @@ import axios from "axios";
 import moment from "moment";
 
 import { AuthContext } from "../context/authContext";
+import { getText } from "../pages/helper";
 
 const WriteNews = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const WriteNews = () => {
             img: file ? imgUrl : "",
             date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           },
-          { withCredentials: true }
+          { withCredentials: "include" }
         ));
       navigate("/");
     } catch (err) {
@@ -82,10 +83,10 @@ const WriteNews = () => {
     }
   };
 
-  const getText = (html) => {
-    const document = new DOMParser().parseFromString(html, "text/html");
-    return document.body.textContent;
-  };
+  // const getText = (html) => {
+  //   const document = new DOMParser().parseFromString(html, "text/html");
+  //   return document.body.textContent;
+  // };
 
   return (
     <div className="mt-[20px] p-8 flex flex-col gap-[20px] md:flex md:flex-row md:items-start">

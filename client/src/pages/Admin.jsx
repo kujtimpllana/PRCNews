@@ -49,40 +49,38 @@ const Admin = () => {
     fetchDataAfterDeletion();
   };
 
-  console.log(currentUser);
-
   return (
     <div className="text-slate-900">
       <AdminDashboard />
       <div className="mb-4 mt-10 flex justify-center">
         <h1 className="font-bold text-xl w-fit border-b-4 border-red-900">
-          User Management
+          Users Management
         </h1>
       </div>
-      <div className="flex justify-center p-2 border-b-2 border-gray-200 gap-[15px]">
+      <div className="flex flex-col text-sm md:text-lg items-center md:justify-center md:flex-row p-2 border-b-2 border-gray-200 gap-[15px]">
         <Link to="/admin">
-          <button className="py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded transition-all">
+          <button className="py-1 px-3 hover:bg-slate-900 hover:text-slate-100 rounded transition-all">
             All Users
           </button>
         </Link>
         <Link to="/admin?user=0">
-          <button className="py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded transition-all">
+          <button className="py-1 px-3 hover:bg-slate-900 hover:text-slate-100 rounded transition-all">
             Simple Users
           </button>
         </Link>
         <Link to="/admin?user=2">
-          <button className="py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded transition-all">
+          <button className="py-1 px-3 hover:bg-slate-900 hover:text-slate-100 rounded transition-all">
             Journalists
           </button>
         </Link>
         <Link to="/admin?user=1">
-          <button className="py-1 px-3 hover:bg-gray-800  hover:text-slate-100 rounded transition-all">
+          <button className="py-1 px-3 hover:bg-slate-900 hover:text-slate-100 rounded transition-all">
             Administrators
           </button>
         </Link>
       </div>
-      <div className="my-10 h-auto">
-        <table className="border-collapse w-full">
+      <div className="my-10 h-auto w-full flex flex-col">
+        <table className="w-full text-sm table-auto border-collapse my-[5rem] md:text-lg md:my-[1rem]">
           <thead>
             <tr>
               <th className="p-[8px] text-left">ID</th>
@@ -94,7 +92,7 @@ const Admin = () => {
             </tr>
           </thead>
           {users.map((user) => (
-            <tbody key={user.id}>
+            <tbody key={user.id} className="even:bg-gray-200">
               <tr className="border-b border-slate-400">
                 <td className="p-[8px]">{user?.id}</td>
                 <td className="p-[8px]">

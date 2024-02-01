@@ -39,7 +39,7 @@ const AdminEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      axios.put(`http://localhost:9000/api/users/${id}`, values);
+      await axios.put(`http://localhost:9000/api/users/${id}`, values);
       navigate("/admin");
     } catch (err) {
       console.log(err);

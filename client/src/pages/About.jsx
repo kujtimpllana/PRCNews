@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <>
-      <div className="flex justify-center items-center w-full h-96 mt-14">
-        <div className="bg-[#D0A650] w-[80%] flex flex-col items-center justify-center p-10 text-gray-950">
+      <div className="flex justify-center items-center w-full h-96 my-[8rem] md:mt-14">
+        <div className="bg-[#D0A650] w-[80%] flex flex-col items-center justify-center p-10 text-gray-950 rounded">
           <img src={logo} alt="About PRC News" width="200px" />
           <h1 className="mt-6 uppercase font-bold text-xl border-b-2 border-gray-950">
             About Us

@@ -5,7 +5,7 @@ const Contact = () => {
   return (
     <>
       <div className="my-12 w-full m-auto h-auto flex flex-col items-center md:flex-row md:w-[80%]">
-        <div className="bg-[#D0A650] p-12 h-[85vh] w-[80%] flex flex-1 flex-col justify-center items-center md:items-end  ">
+        <div className="bg-[#D0A650] p-12 h-[85vh] w-[80%] flex flex-1 flex-col justify-center items-center rounded-t md:items-end md:rounded-l md:rounded-t-none">
           <img
             src={logo}
             alt="Contact PRC News"
@@ -23,7 +23,7 @@ const Contact = () => {
             <b>Address</b>: Pristina, Kosova. Unknown St.
           </p>
         </div>
-        <form className="p-12 flex flex-1 flex-col bg-[#244AA5] w-[80%] h-[85vh] text-slate-100">
+        <form className="p-12 flex flex-1 flex-col bg-[#244AA5] w-[80%] h-[85vh] rounded-b text-slate-100 md:rounded-r md:rounded-b-none">
           <h1 className="my-2 uppercase font-bold text-lg text-center">
             Fill out the form
           </h1>

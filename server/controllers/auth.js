@@ -40,7 +40,7 @@ export const login = (req, res) => {
     if (!isPasswordCorrect)
       return res.status(400).json("Wrong email or password!");
 
-    const token = jwt.sign({ id: data[0].id }, "jwtkey");
+    const token = jwt.sign({ id: data[0].id }, "jwtkey", { expiresIn: "1h" });
     const { password, ...other } = data[0];
 
     //using cookie-parser library

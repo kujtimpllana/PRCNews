@@ -35,3 +35,14 @@ export const loginValidation = yup.object({
       "At least 8 letters, 1 uppercase, number and symbol"
     ),
 });
+
+export const profileEditPassword = yup.object({
+  password:
+    "" ||
+    yup
+      .string()
+      .matches(
+        passwordRegex,
+        "At least 8 letters, 1 uppercase, number and symbol"
+      ),
+});

@@ -21,24 +21,26 @@ const PostSideBar = ({ category, postId }) => {
   }, [category]);
 
   return (
-    <div className="flex flex-col gap-[25px] mb-6 text-gray-800">
+    <div className="flex flex-col gap-[25px] mb-6 text-slate-800">
+      {posts.length > 1 && (
+        <h1 className="font-bold text-slate-800 text-lg">
+          You might also be interested in:
+        </h1>
+      )}
       {posts
         .filter((post) => post.id != postId)
         .map((post) => (
-          <Link to={`/post/${post.id}`}>
-            <h1 className="font-bold text-lg">
-              You also might be interested in
-            </h1>
-            <div className="flex flex-col gap-[10px]" key={post.id}>
+          <Link to={`/post/${post.id}`} key={post.id}>
+            <div
+              className="flex flex-col gap-[10px] hover:underline"
+              onClick={() => window.scrollTo(0, 0)}
+            >
               <img
                 src={`../uploads/${post?.img}`}
-                className="w-[100%] h-[200px] object-cover rounded"
+                className="w-[100%] h-[200px] object-cover rounded opacity-95 hover:opacity-100 transition-all duration-[150ms]"
                 alt=""
               />
               <h2 className="font-bold text-md">{post.title}</h2>
-              <button className="w-[115px] h-[35px] border-2 border-gray-800 hover:bg-gray-800 hover:text-gray-100 rounded transition-all">
-                Read more
-              </button>
             </div>
           </Link>
         ))}

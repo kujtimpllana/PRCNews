@@ -11,7 +11,8 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (formInput) => {
     const res = await axios.post(
       "http://localhost:9000/api/auth/login",
-      formInput
+      formInput,
+      { withCredentials: "include" }
     );
     setCurrentUser(res.data);
   };
