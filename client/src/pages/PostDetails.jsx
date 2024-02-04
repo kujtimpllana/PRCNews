@@ -189,7 +189,7 @@ const PostDetails = () => {
                 </div>
               </div>
               <div className="mb-10">
-                <h1 className="font-bold text-slate-950 text-lg mb-4">
+                <h1 className="font-bold text-slate-950 text-2xl mb-8">
                   {getText(post.title)}
                 </h1>
                 <p className="text-slate-900 text-justify leading-7">
