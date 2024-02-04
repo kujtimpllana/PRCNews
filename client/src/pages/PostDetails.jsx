@@ -137,7 +137,7 @@ const PostDetails = () => {
             <div className="md:flex-[5]">
               <img
                 src={`../uploads/${post?.img}`}
-                className="w-full md:h-[450px] object-cover rounded"
+                className="bg-slate-300 w-full object-contain rounded"
                 alt={`${post?.title}`}
               />
               <div className="flex items-center justify-between gap-[10px] my-6">

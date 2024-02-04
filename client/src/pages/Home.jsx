@@ -13,9 +13,6 @@ const Home = () => {
   const category = useLocation().search;
   const ref = useRef();
 
-  console.log(posts.length);
-  console.log(totalNumOfPosts);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
