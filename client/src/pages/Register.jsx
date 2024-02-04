@@ -12,6 +12,8 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
+import { getText } from "../pages/helper";
+
 const Register = () => {
   const initialValues = {
     fullname: "",
@@ -65,7 +67,7 @@ const Register = () => {
             id="fullname"
             name="fullname"
             placeholder="John Doe"
-            value={values.fullname}
+            value={getText(values.fullname)}
             onChange={handleChange}
             onBlur={handleBlur}
             autoFocus
@@ -86,7 +88,7 @@ const Register = () => {
             id="email"
             name="email"
             placeholder="johndoe@domain.ext"
-            value={values.email}
+            value={getText(values.email)}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -106,7 +108,7 @@ const Register = () => {
             id="password"
             name="password"
             placeholder="************"
-            value={values.password}
+            value={getText(values.password)}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -126,7 +128,7 @@ const Register = () => {
             id="confirmPassword"
             name="confirmPassword"
             placeholder="************"
-            value={values.confirmPassword}
+            value={getText(values.confirmPassword)}
             onChange={handleChange}
             onBlur={handleBlur}
           />

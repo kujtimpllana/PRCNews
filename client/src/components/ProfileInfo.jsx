@@ -15,10 +15,12 @@ const ProfileInfo = ({ currentUser, logout }) => {
     role: currentUser.role || "",
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleEditSubmit = async (e) => {
     try {
+      setIsSubmitting(true);
       await axios.put(
         `http://localhost:9000/api/users/profile/data/${currentUser.id}`,
         values
@@ -27,6 +29,8 @@ const ProfileInfo = ({ currentUser, logout }) => {
       navigate("/login");
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(true);
     }
   };
 
@@ -101,8 +105,9 @@ const ProfileInfo = ({ currentUser, logout }) => {
       <button
         type="submit"
         className="flex gap-2 items-center w-full my-7 py-2 px-6 bg-green-900 text-slate-100 hover:bg-green-800 rounded transition-all"
+        disabled={isSubmitting}
       >
-        Confirm Changes
+        {isSubmitting ? "Confirming Changes..." : "Confirm Changes"}
         <FaSdCard />
       </button>
     </form>

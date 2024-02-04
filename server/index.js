@@ -10,9 +10,15 @@ import cors from "cors";
 import multer from "multer";
 import path from "path";
 
+import dotenv from "dotenv";
+
+// import rateLimit from "express-rate-limit";
+
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+
+dotenv.config();
 
 app.use(
   cors({
@@ -20,6 +26,14 @@ app.use(
     credentials: true,
   })
 );
+
+// on production environment we should set this up
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15min
+//   max: 50, // each IP 50 tries max per window
+// });
+
+// app.use(limiter);
 
 //multer funcionallity dedicated to post images
 
@@ -103,6 +117,6 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/bookmark", bookmark);
 
-app.listen(9000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Connected!");
 });

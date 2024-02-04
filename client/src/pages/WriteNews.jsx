@@ -9,6 +9,7 @@ import moment from "moment";
 
 import { AuthContext } from "../context/authContext";
 import { getText } from "../pages/helper";
+import { FaUpload } from "react-icons/fa";
 
 const WriteNews = () => {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ const WriteNews = () => {
   const [value, setValue] = useState(state?.desc || "");
   const [file, setFile] = useState(null);
   const [category, setCategory] = useState(state?.category || "");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!currentUser || currentUser.role !== "2") navigate("/");
@@ -44,14 +47,15 @@ const WriteNews = () => {
     const imgUrl = await upload();
 
     try {
+      setIsSubmitting(true);
       !state &&
         (await axios.post(
           `http://localhost:9000/api/news/`,
           {
-            title,
-            desc: value,
-            category,
-            img: file ? imgUrl : "",
+            title: getText(title),
+            desc: getText(value),
+            category: getText(category),
+            img: file ? getText(imgUrl) : "",
             date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           },
           { withCredentials: "include" }
@@ -59,6 +63,8 @@ const WriteNews = () => {
       navigate("/");
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -66,20 +72,23 @@ const WriteNews = () => {
     e.preventDefault();
     const imgUrl = await upload();
     try {
+      setIsSubmitting(true);
       state &&
         (await axios.put(
           `http://localhost:9000/api/news/${state.id}`,
           {
-            title,
-            desc: value,
-            category,
-            img: file ? imgUrl : "",
+            title: getText(title),
+            desc: getText(value),
+            category: getText(category),
+            img: file ? getText(imgUrl) : "",
           },
           { withCredentials: true }
         ));
       navigate("/");
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -96,7 +105,7 @@ const WriteNews = () => {
           placeholder="Title"
           className="p-[10px] border-2 border-gray-200 rounded"
           onChange={(e) => setTitle(e.target.value)}
-          value={getText(title)}
+          value={title}
         />
         <div className="h-[340px] overflow-x-sdscroll">
           <ReactQuill
@@ -112,9 +121,9 @@ const WriteNews = () => {
           <h1 className="font-bold text-lg">Publish</h1>
           <label
             htmlFor="file"
-            className="bg-gray-200 w-[140px] h-auto text-center cursor-pointer p-1 rounded hover:bg-gray-300"
+            className="flex gap-2 justify-center items-center text-slate-100 bg-slate-800 w-[140px] h-auto text-center cursor-pointer p-1 rounded hover:bg-slate-900 transition-all"
           >
-            Upload Image
+            Upload Image <FaUpload />
           </label>
           <input
             style={{ display: "none" }}
@@ -124,18 +133,24 @@ const WriteNews = () => {
             onChange={(e) => setFile(e.target.files[0])}
           />
           <div className="flex justify-evenly">
-            <button
-              onClick={handleEdit}
-              className="bg-green-800 hover:bg-green-700 text-gray-100 px-4 py-1 transition-all rounded"
-            >
-              Save
-            </button>
-            <button
-              onClick={handleClick}
-              className="bg-yellow-700 hover:bg-yellow-600 text-gray-100 px-4 py-1 transition-all rounded"
-            >
-              Publish
-            </button>
+            {state && (
+              <button
+                onClick={handleEdit}
+                className="bg-green-800 hover:bg-green-700 text-gray-100 px-4 py-1 transition-all rounded"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Saving..." : "Save"}
+              </button>
+            )}
+            {!state && (
+              <button
+                onClick={handleClick}
+                className="bg-yellow-700 hover:bg-yellow-600 text-gray-100 px-4 py-1 transition-all rounded"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Publishing..." : "Publish"}
+              </button>
+            )}
           </div>
         </div>
         <div className="border-2 border-gray-200 rounded p-[10px] flex flex-col gap-[15px] flex-[1]">

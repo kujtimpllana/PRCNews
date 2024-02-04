@@ -14,6 +14,7 @@ const Admin = () => {
   if (!currentUser || currentUser.role !== "1") navigate("/");
 
   const [users, setUsers] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const role = useLocation().search;
 
@@ -40,11 +41,14 @@ const Admin = () => {
 
   const handleDelete = async (id) => {
     try {
+      setIsSubmitting(true);
       await axios.delete(`http://localhost:9000/api/users/${id}`, {
         withCredentials: "include",
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
     fetchDataAfterDeletion();
   };
@@ -108,7 +112,10 @@ const Admin = () => {
                   </Link>
                 </td>
                 <td className="py-[8px]">
-                  <Link onClick={() => handleDelete(user.id)} to="/admin">
+                  <Link
+                    onClick={() => !isSubmitting && handleDelete(user.id)}
+                    to="/admin"
+                  >
                     {user?.role === "1" ? (
                       <></>
                     ) : (

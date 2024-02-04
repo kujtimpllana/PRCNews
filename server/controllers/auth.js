@@ -1,10 +1,12 @@
 import { db } from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const register = (req, res) => {
   const q = "SELECT * FROM users WHERE email = ?";
-
   db.query(q, [req.body.email], (err, data) => {
     if (err) return res.json(err);
     if (data.length)
@@ -40,7 +42,9 @@ export const login = (req, res) => {
     if (!isPasswordCorrect)
       return res.status(400).json("Wrong email or password!");
 
-    const token = jwt.sign({ id: data[0].id }, "jwtkey", { expiresIn: "1h" });
+    const token = jwt.sign({ id: data[0].id }, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
     const { password, ...other } = data[0];
 
     //using cookie-parser library

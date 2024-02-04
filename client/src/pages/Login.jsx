@@ -11,6 +11,8 @@ import { AuthContext } from "../context/authContext";
 import { loginValidation } from "./validations/authValidation";
 import { useFormik } from "formik";
 
+import { getText } from "../pages/helper";
+
 const Login = () => {
   const initialValues = { email: "", password: "" };
 
@@ -58,7 +60,7 @@ const Login = () => {
             id="email"
             name="email"
             placeholder="johndoe@domain.ext"
-            value={values.email}
+            value={getText(values.email)}
             onChange={handleChange}
             onBlur={handleBlur}
             autoFocus
@@ -79,7 +81,7 @@ const Login = () => {
             id="password"
             name="password"
             placeholder="************"
-            value={values.password}
+            value={getText(values.password)}
             onChange={handleChange}
             onBlur={handleBlur}
           />

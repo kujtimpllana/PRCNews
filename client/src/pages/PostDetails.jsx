@@ -26,8 +26,9 @@ const PostDetails = () => {
 
   const { currentUser } = useContext(AuthContext);
 
-  // const [isSaved, setIsSaved] = useState(false);
   const [bookmarks, setBookmarks] = useState([]);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,17 +49,21 @@ const PostDetails = () => {
 
   const handleDelete = async () => {
     try {
+      setIsSubmitting(true);
       await axios.delete(`http://localhost:9000/api/news/${postId}`, {
         withCredentials: "include",
       });
       navigate("/");
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleSaveBookmark = async () => {
     try {
+      setIsSubmitting(true);
       await axios.post(
         `http://localhost:9000/api/bookmark/save/${postId}`,
         { isSaved: "true" },
@@ -68,17 +73,22 @@ const PostDetails = () => {
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
     }
     fetchDataAfterDeletion();
   };
 
   const handleDeleteBookmark = async () => {
     try {
+      setIsSubmitting(true);
       await axios.delete(`http://localhost:9000/api/bookmark/save/${postId}`, {
         withCredentials: "include",
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
     }
     fetchDataAfterDeletion();
   };
@@ -130,27 +140,24 @@ const PostDetails = () => {
               </div>
               {currentUser?.fullname === post?.fullname && (
                 <div className="flex gap-[10px] text-gray-800">
-                  <Link to={`/write?edit=2`} state={post}>
+                  <Link to={`/write?edit=${post.id}`} state={post}>
                     <FaPen className="hover:text-yellow-800 cursor-pointer transition-all" />
                   </Link>
-                  <FaTrash
-                    onClick={handleDelete}
-                    className="hover:text-red-800 cursor-pointer transition-all"
-                  />
+                  <button onClick={handleDelete} disabled={isSubmitting}>
+                    <FaTrash className="hover:text-red-800 cursor-pointer transition-all" />
+                  </button>
                 </div>
               )}
             </div>
             <div className="flex items-center">
               {bookmarks[0]?.saved_status == "true" ? (
-                <FaBookmark
-                  className="text-2xl cursor-pointer"
-                  onClick={handleDeleteBookmark}
-                />
+                <button onClick={handleDeleteBookmark} disabled={isSubmitting}>
+                  <FaBookmark className="text-2xl cursor-pointer" />
+                </button>
               ) : (
-                <FaRegBookmark
-                  className="text-2xl cursor-pointer"
-                  onClick={handleSaveBookmark}
-                />
+                <button onClick={handleSaveBookmark} disabled={isSubmitting}>
+                  <FaRegBookmark className="text-2xl cursor-pointer" />
+                </button>
               )}
             </div>
           </div>

@@ -13,6 +13,9 @@ const Home = () => {
   const category = useLocation().search;
   const ref = useRef();
 
+  console.log(posts.length);
+  console.log(totalNumOfPosts);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -204,7 +207,7 @@ const Home = () => {
                   </Link>
                 </div>
               ))}
-          {posts.length >= 10 && (
+          {posts.length < totalNumOfPosts && (
             <button
               type="button"
               className="py-1 px-3 ml-10 my-5 rounded text-slate-100 bg-slate-900 hover:bg-slate-950 transition-all"

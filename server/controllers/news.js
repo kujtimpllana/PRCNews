@@ -17,6 +17,7 @@ let INDEX = 10;
 export const getPostsByFixedSize = (req, res) => {
   if (INDEX >= 1000000) INDEX = 0;
   INDEX += 10;
+
   const q = req.query.cat
     ? `SELECT DISTINCT * FROM news WHERE category=? ORDER BY date DESC LIMIT ${INDEX}`
     : `SELECT DISTINCT * FROM news ORDER BY date DESC LIMIT ${INDEX}`;
@@ -72,20 +73,33 @@ export const addPost = (req, res) => {
 
 export const updatePost = (req, res) => {
   const postId = req.params.id;
-  const q =
-    "UPDATE news SET `title` = ?, `desc` = ?, `img` = ?, `category` = ? WHERE `id` = ? AND `uid` = ?";
 
-  const values = [
-    req.body?.title,
-    req.body?.desc,
-    req.body?.img,
-    req.body?.category,
-  ];
+  if (req.body.img) {
+    const q =
+      "UPDATE news SET `title` = ?, `desc` = ?, `img` = ?, `category` = ? WHERE `id` = ? AND `uid` = ?";
 
-  db.query(q, [...values, postId, res.locals.user.id], (err, data) => {
-    if (err) return res.status(500).json(err);
-    return res.json("Post has been updated.");
-  });
+    const values = [
+      req.body?.title,
+      req.body?.desc,
+      req.body?.img,
+      req.body?.category,
+    ];
+
+    db.query(q, [...values, postId, res.locals.user.id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.json("Post has been updated.");
+    });
+  } else if (!req.body.img) {
+    const q =
+      "UPDATE news SET `title` = ?, `desc` = ?, `category` = ? WHERE `id` = ? AND `uid` = ?";
+
+    const values = [req.body?.title, req.body?.desc, req.body?.category];
+
+    db.query(q, [...values, postId, res.locals.user.id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.json("Post has been updated.");
+    });
+  }
 };
 
 export const deletePost = (req, res) => {
@@ -123,6 +137,7 @@ export const addComment = (req, res) => {
 
 export const updateCommentById = (req, res) => {
   const commentId = req.params.id;
+
   const q =
     "UPDATE comments SET `description` = ? WHERE `id` = ? AND `user_id` = ?";
 

@@ -15,7 +15,6 @@ export const getUsers = (req, res) => {
 
 export const getSingleUser = (req, res) => {
   const userId = req.params.id;
-  //remove profile_photo if any errors
   const q =
     "SELECT fullname, email, role, profile_photo FROM users WHERE id = ?";
 
@@ -44,6 +43,7 @@ export const editUser = (req, res) => {
 export const editUserProfile = (req, res) => {
   const userId = req.params.id;
   const password = req.body.password;
+
   if (password) {
     //password hashing
     const salt = bcrypt.genSaltSync(10);
@@ -52,7 +52,7 @@ export const editUserProfile = (req, res) => {
     const q =
       "UPDATE users SET fullname = ?, email = ?, password = ? WHERE id = ?";
 
-    const values = [req.body.fullname, req.body.email, hash, req.body.role];
+    const values = [req.body.fullname, req.body.email, hash];
 
     db.query(q, [...values, userId], (err, data) => {
       if (err) return res.status(500).json(err);
@@ -62,7 +62,7 @@ export const editUserProfile = (req, res) => {
   } else {
     const q = "UPDATE users SET fullname = ?, email = ? WHERE id = ?";
 
-    const values = [req.body.fullname, req.body.email, req.body.role];
+    const values = [req.body.fullname, req.body.email];
 
     db.query(q, [...values, userId], (err, data) => {
       if (err) return res.status(500).json(err);

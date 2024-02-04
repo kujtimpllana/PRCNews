@@ -4,6 +4,7 @@ import AdminDashboard from "../components/AdminDashboard";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import DOMPurify from "dompurify";
 
 const AdminEdit = () => {
   //grab id from URL
@@ -15,6 +16,7 @@ const AdminEdit = () => {
     email: "",
     role: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -39,10 +41,13 @@ const AdminEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsSubmitting(true);
       await axios.put(`http://localhost:9000/api/users/${id}`, values);
       navigate("/admin");
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -64,7 +69,12 @@ const AdminEdit = () => {
             name="fullname"
             placeholder="John Doe"
             value={values.fullname || ""}
-            onChange={(e) => setValues({ ...values, fullname: e.target.value })}
+            onChange={(e) =>
+              setValues({
+                ...values,
+                fullname: DOMPurify.sanitize(e.target.value),
+              })
+            }
           />
 
           <label className="mt-2 p-1" htmlFor="email">
@@ -77,7 +87,12 @@ const AdminEdit = () => {
             name="email"
             placeholder="example@example.com"
             value={values.email || ""}
-            onChange={(e) => setValues({ ...values, email: e.target.value })}
+            onChange={(e) =>
+              setValues({
+                ...values,
+                email: DOMPurify.sanitize(e.target.value),
+              })
+            }
           />
 
           <label className="mt-2 p-1" htmlFor="role">
@@ -90,7 +105,9 @@ const AdminEdit = () => {
             name="role"
             placeholder="0(Simple), 1(Admin) & 2(Journalist)"
             value={values.role || ""}
-            onChange={(e) => setValues({ ...values, role: e.target.value })}
+            onChange={(e) =>
+              setValues({ ...values, role: DOMPurify.sanitize(e.target.value) })
+            }
           />
 
           <p className="my-2">
@@ -100,8 +117,11 @@ const AdminEdit = () => {
             </Link>
             .
           </p>
-          <button className=" w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded">
-            Confirm Changes
+          <button
+            className="w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Confirming Changes..." : "Confirm Changes"}
           </button>
         </form>
       </div>

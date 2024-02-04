@@ -11,7 +11,7 @@ const AdminDashboard = () => {
       <div>
         <h1 className="font-bold">Administrator:</h1>
       </div>
-      <div className="flex gap-[5px]">
+      <div className="flex items-center gap-[5px]">
         {currentUser?.profile_photo ? (
           <img
             className="rounded object-cover"

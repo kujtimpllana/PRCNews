@@ -5,17 +5,20 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
+import DOMPurify from "dompurify";
+
 const Comment = ({ currentUser, postId }) => {
   //Comments from back-end
   const [comments, setComments] = useState([]);
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [input, setInput] = useState("");
 
   const reqData = {
-    postId: postId ? postId : 0,
-    description: input ? input : "",
+    postId: postId ? DOMPurify.sanitize(postId) : 0,
+    description: input ? DOMPurify.sanitize(input) : "",
   };
 
   const [updateComment, setUpdateComment] = useState({
@@ -47,6 +50,7 @@ const Comment = ({ currentUser, postId }) => {
 
   const handleSubmitComment = async () => {
     try {
+      setIsSubmitting(true);
       await axios.post("http://localhost:9000/api/news/comment", reqData, {
         withCredentials: "include",
       });
@@ -56,35 +60,10 @@ const Comment = ({ currentUser, postId }) => {
       setComments(res.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
     }
     clearComment();
-  };
-
-  const handleEditComment = async () => {
-    const values = {
-      id: updateComment.id,
-      nid: updateComment.nid,
-      user_id: updateComment.user_id,
-      description: input,
-    };
-
-    try {
-      await axios.put(
-        `http://localhost:9000/api/news/comment/update/${updateComment.id}`,
-        values,
-        { withCredentials: "include" }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-    setIsEditing(false);
-    setInput("");
-
-    //re-fetch comments
-    const res = await axios.get(
-      `http://localhost:9000/api/news/comment/total/${postId}`
-    );
-    setComments(res.data);
   };
 
   const handleSetEdit = async (
@@ -94,13 +73,43 @@ const Comment = ({ currentUser, postId }) => {
   ) => {
     setInput(comment_description);
     setUpdateComment({
-      id: comment_id,
-      nid: comment_nid,
-      user_id: currentUser.id,
+      id: DOMPurify.sanitize(comment_id),
+      nid: DOMPurify.sanitize(comment_nid),
+      user_id: DOMPurify.sanitize(currentUser.id),
     });
     setIsEditing(true);
     ref.current.focus();
     window.scrollTo(ref.current);
+  };
+
+  const handleEditComment = async () => {
+    const values = {
+      id: DOMPurify.sanitize(updateComment.id),
+      nid: DOMPurify.sanitize(updateComment.nid),
+      user_id: DOMPurify.sanitize(updateComment.user_id),
+      description: DOMPurify.sanitize(input),
+    };
+
+    try {
+      setIsSubmitting(true);
+      await axios.put(
+        `http://localhost:9000/api/news/comment/update/${updateComment.id}`,
+        values,
+        { withCredentials: "include" }
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsEditing(false);
+      setInput("");
+      setIsSubmitting(false);
+    }
+
+    //re-fetch comments
+    const res = await axios.get(
+      `http://localhost:9000/api/news/comment/total/${postId}`
+    );
+    setComments(res.data);
   };
 
   const handleDeleteComment = async (commentId) => {
@@ -173,9 +182,10 @@ const Comment = ({ currentUser, postId }) => {
                 type="button"
                 className="py-1 px-3 rounded text-slate-100 bg-green-900 hover:bg-green-800 cursor-pointer transition-all"
                 onClick={isEditing ? handleEditComment : handleSubmitComment}
-                disabled={input.length <= 1}
+                disabled={input.length <= 1 || isSubmitting}
               >
                 {isEditing ? "Update" : "Publish"}
+                {isSubmitting ? "..." : ""}
               </button>
             </div>
           </div>
