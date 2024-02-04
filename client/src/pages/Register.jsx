@@ -22,10 +22,13 @@ const Register = () => {
     confirmPassword: "",
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     try {
+      setIsSubmitting(true);
       const { confirmPassword, ...data } = values;
       const response = await axios.post(
         "http://localhost:9000/api/auth/register",
@@ -39,6 +42,8 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -153,8 +158,9 @@ const Register = () => {
           <button
             type="submit"
             className="w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded transition-all"
+            disabled={isSubmitting}
           >
-            Register
+            {isSubmitting ? "Registering..." : "Register"}
           </button>
         </form>
       </div>

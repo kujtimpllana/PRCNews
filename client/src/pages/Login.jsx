@@ -17,6 +17,7 @@ const Login = () => {
   const initialValues = { email: "", password: "" };
 
   const [err, setErr] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ const Login = () => {
 
   const onSubmit = async (values) => {
     try {
+      setIsSubmitting(true);
       await login(values);
       toast.success("Successfully logged in");
       setTimeout(() => {
@@ -31,6 +33,8 @@ const Login = () => {
       }, 1500);
     } catch (error) {
       setErr("Something went wrong, please try again!");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -112,8 +116,9 @@ const Login = () => {
           <button
             type="submit"
             className="w-full mt-4 py-1 px-3 border-2 border-gray-950 text-gray-950 hover:bg-slate-950 hover:text-slate-100 rounded transition-all"
+            disabled={isSubmitting}
           >
-            Login
+            {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>
